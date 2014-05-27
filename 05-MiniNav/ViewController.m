@@ -17,7 +17,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    vue = [[myView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //[self setView:vue];
+    [[self view] addSubview:vue];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,4 +32,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [vue setFromOrientation:toInterfaceOrientation];
+}
 @end

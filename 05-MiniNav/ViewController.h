@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "myView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    myView *vue;
+}
 
 @end
