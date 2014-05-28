@@ -22,6 +22,7 @@
             isIpad = NO;
         }
         
+        // Test taille de l'écran, pour affichage des Alertes avec message
         if ([[UIScreen mainScreen]bounds].size.width<768) {
             isLowRes = YES;
         } else {
@@ -39,7 +40,9 @@
             // Init bouton de la ToolBar
         refreshBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
         backBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(changePage:)];
+        [backBarButton setEnabled:NO];
         forwardBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(changePage:)];
+        [forwardBarButton setEnabled:NO];
         homeBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(defineHomePage:)];
         chooseBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(chooseURL:)];
         flexibleSpaceBarButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -64,6 +67,9 @@
         
         // et on affiche tout ça
         [self setFromOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+        
+        // on charge la pageWeb d'acceuil tant qu'a faire
+        [self refreshPage:nil];
     }
     return self;
 }
@@ -125,15 +131,16 @@
     if (alertView == chooseHomePage) {
         if (buttonIndex ==1) {
             // Recharger la page d'accueil
-            homePageURLString = [[alertView textFieldAtIndex:0] text];
+            homePageURLString = [self getURLfromString:[[alertView textFieldAtIndex:0] text]];
+            NSLog(@"url:%@",homePageURLString);
         }
     }
-    
+
     // Choose WebPage Alert
     if (alertView == chooseWebPage) {
         if (buttonIndex ==1) {
             // Changer la PageWeb
-            [self getThisURL:[[NSURL alloc] initWithString:[[alertView textFieldAtIndex:0] text]]];
+            [self getThisURL:[[NSURL alloc] initWithString:[self getURLfromString:[[alertView textFieldAtIndex:0] text]]]];
         }
     }
     
@@ -150,18 +157,56 @@
 }
 
 
--(void) changePage:(UIBarButtonItem*)sender {
+-(void)changePage:(UIBarButtonItem*)sender {
     if (sender == backBarButton) {
-        [maWebView goBack];
+        if ([maWebView canGoBack]) {
+            [maWebView goBack];
+        }
     } else {
-        [maWebView goForward];
+        if ([maWebView canGoForward]) {
+            [maWebView goForward];
+        }
     }
 }
 
--(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    // Init Alert
+    // Init Alert de la WebView
     [[[UIAlertView alloc] initWithTitle:@"Erreur" message:[NSString stringWithFormat:@"%@",[error localizedDescription]] delegate:nil cancelButtonTitle:@"Oops" otherButtonTitles:nil] show];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    // Gestion des boutons précédent/suivant
+        //goBack
+    if ([webView canGoBack]) {
+        [backBarButton setEnabled:YES];
+    } else {
+        [backBarButton setEnabled:NO];
+    }
+        //goForward
+    if ([webView canGoForward]) {
+        [forwardBarButton setEnabled:YES];
+    } else {
+        [forwardBarButton setEnabled:NO];
+    }
+    
+    
+}
+
+-(NSString *)getURLfromString:(NSString *)text{
+ 
+    NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
+    NSArray *matches = [linkDetector matchesInString:text options:0 range:NSMakeRange(0, [text length])];
+    NSLog(@"%@",matches);
+    for (NSTextCheckingResult *match in matches) {
+        if ([match resultType] == NSTextCheckingTypeLink) {
+            NSURL* url = [match URL];
+            NSLog(@"%@",url);
+            text = [url absoluteString];
+        }
+    }
+    return text;
 }
 
 @end
