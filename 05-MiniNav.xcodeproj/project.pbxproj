@@ -23,6 +23,9 @@
 		1951F6731934E7E3009D167C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1951F6711934E7E3009D167C /* InfoPlist.strings */; };
 		1951F6751934E7E3009D167C /* _5_MiniNavTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1951F6741934E7E3009D167C /* _5_MiniNavTests.m */; };
 		1951F6801934E95E009D167C /* myView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1951F67F1934E95E009D167C /* myView.m */; };
+		1951F6831935E40D009D167C /* fond-1024x1024.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1951F6811935E40D009D167C /* fond-1024x1024.jpg */; };
+		1951F6841935E40D009D167C /* fond-2048x2048.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1951F6821935E40D009D167C /* fond-2048x2048.jpg */; };
+		1951F68C1935E780009D167C /* ios7-home-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1951F68B1935E780009D167C /* ios7-home-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,9 @@
 		1951F6741934E7E3009D167C /* _5_MiniNavTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _5_MiniNavTests.m; sourceTree = "<group>"; };
 		1951F67E1934E95E009D167C /* myView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myView.h; sourceTree = "<group>"; };
 		1951F67F1934E95E009D167C /* myView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myView.m; sourceTree = "<group>"; };
+		1951F6811935E40D009D167C /* fond-1024x1024.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fond-1024x1024.jpg"; sourceTree = "<group>"; };
+		1951F6821935E40D009D167C /* fond-2048x2048.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fond-2048x2048.jpg"; sourceTree = "<group>"; };
+		1951F68B1935E780009D167C /* ios7-home-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-home-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +132,9 @@
 				1951F67E1934E95E009D167C /* myView.h */,
 				1951F67F1934E95E009D167C /* myView.m */,
 				1951F6611934E7E3009D167C /* Images.xcassets */,
+				1951F6811935E40D009D167C /* fond-1024x1024.jpg */,
+				1951F6821935E40D009D167C /* fond-2048x2048.jpg */,
+				1951F68B1935E780009D167C /* ios7-home-icon.png */,
 				1951F64D1934E7E3009D167C /* Supporting Files */,
 			);
 			path = "05-MiniNav";
@@ -239,7 +248,10 @@
 				1951F65D1934E7E3009D167C /* Main_iPad.storyboard in Resources */,
 				1951F6621934E7E3009D167C /* Images.xcassets in Resources */,
 				1951F65A1934E7E3009D167C /* Main_iPhone.storyboard in Resources */,
+				1951F6841935E40D009D167C /* fond-2048x2048.jpg in Resources */,
 				1951F6511934E7E3009D167C /* InfoPlist.strings in Resources */,
+				1951F68C1935E780009D167C /* ios7-home-icon.png in Resources */,
+				1951F6831935E40D009D167C /* fond-1024x1024.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +488,7 @@
 				1951F67A1934E7E3009D167C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1951F67B1934E7E3009D167C /* Build configuration list for PBXNativeTarget "05-MiniNavTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +497,7 @@
 				1951F67D1934E7E3009D167C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

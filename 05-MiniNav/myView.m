@@ -29,6 +29,10 @@
             isLowRes = NO;
         }
         
+        // Init Fond
+        monFond = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fond-2048x2048.jpg"]];
+        [self addSubview:monFond];
+        
         // Init WebView
         maWebView = [[UIWebView alloc] init];
         [maWebView setDelegate:self];
@@ -36,9 +40,10 @@
         [maWebView setBackgroundColor:[UIColor whiteColor]]; // sinon c'est noir par défaut et ça fait moche
         [self addSubview:maWebView];
         
+        
         // Init ToolBar
             // Init bouton de la ToolBar
-        refreshBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
+        refreshBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ios7-home-icon.png"] style:UIBarButtonItemStyleDone target:self action:@selector(refreshPage:)];
         backBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(changePage:)];
         [backBarButton setEnabled:NO];
         forwardBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(changePage:)];
@@ -172,7 +177,9 @@
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     // Init Alert de la WebView
-    [[[UIAlertView alloc] initWithTitle:@"Erreur" message:[NSString stringWithFormat:@"%@",[error localizedDescription]] delegate:nil cancelButtonTitle:@"Oops" otherButtonTitles:nil] show];
+    if ([error code]!=NSURLErrorCancelled) { // évite l'erreur 999 : page pas finie d'être chargée
+        [[[UIAlertView alloc] initWithTitle:@"Erreur" message:[NSString stringWithFormat:@"%@",[error localizedDescription]] delegate:nil cancelButtonTitle:@"Oops" otherButtonTitles:nil] show];
+    }
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
@@ -190,8 +197,11 @@
     } else {
         [forwardBarButton setEnabled:NO];
     }
-    
-    
+    isLoading = NO;
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    isLoading = YES;
 }
 
 -(NSString *)getURLfromString:(NSString *)text{

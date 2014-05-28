@@ -12,6 +12,7 @@
     // Vues
     UIWebView *maWebView;
     UIToolbar *maToolBar;
+    UIImageView *monFond;
     
     // ToolBar Button
     UIBarButtonItem *refreshBarButton;
@@ -27,6 +28,7 @@
     
     // Alerte
     UIAlertView *erreurWebPage;
+    BOOL isLoading;
     
     // Bool
     BOOL isIpad;
